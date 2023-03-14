@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Stadium } from "../../stadiums/entities/stadium.entity";
 
 interface MediaAttrs {
     name: string;
@@ -17,9 +18,13 @@ export class Media extends Model<Media, MediaAttrs> {
     @Column({ type: DataType.STRING })
     description: string;
 
+    @ForeignKey(() => Stadium)
     @Column({ type: DataType.INTEGER })
     stadium_id: number;
 
-    // @BelongsToMany(() => Role, () => UserRole)
-    // role: Role[];
+    @BelongsTo(() => Stadium)
+    stadium: Stadium[];
+    
+    // HasMany(() => District)
+    // district: District[];
 }

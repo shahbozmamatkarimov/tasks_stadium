@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { Stadium } from "../../stadiums/entities/stadium.entity";
+import { Cart } from "../../cart/entities/cart.entity";
+import { Order } from "../../orders/entities/order.entity";
 
 interface StadiumTimeAttrs {
     stadium_id: number;
@@ -13,6 +16,7 @@ export class StadiumTime extends Model<StadiumTime, StadiumTimeAttrs> {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     id: number;
 
+    @ForeignKey(() => Stadium)
     @Column({ type: DataType.INTEGER })
     stadium_id: number;
 
@@ -25,6 +29,12 @@ export class StadiumTime extends Model<StadiumTime, StadiumTimeAttrs> {
     @Column({ type: DataType.NUMBER })
     price: number;
 
-    // @BelongsToMany(() => Role, () => UserRole)
-    // role: Role[];
+    @BelongsTo(() => Stadium)
+    stadium: Stadium[];
+    
+    @HasMany(() => Cart)
+    cart: Cart[];
+
+    @HasMany(() => Order)
+    order: Order[];
 }

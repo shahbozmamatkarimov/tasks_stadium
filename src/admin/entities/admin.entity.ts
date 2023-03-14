@@ -41,4 +41,7 @@ export class Admin extends Model<Admin, AdminAttrs> {
 
     // @BelongsToMany(() => Role, () => UserRole)
     // role: Role[];
+
+    // HasMany(() => District)
+    // district: District[];
 }

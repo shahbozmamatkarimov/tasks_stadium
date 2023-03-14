@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { ComfortStadium } from "../../comfort-stadium/entities/comfort-stadium.entity";
 
 interface ComfortAttrs {
     name: string;
@@ -14,6 +15,6 @@ export class Comfort extends Model<Comfort, ComfortAttrs> {
     @Column({ type: DataType.STRING })
     name: string;
 
-    // @BelongsToMany(() => Role, () => UserRole)
-    // role: Role[];
+    @HasMany(() => ComfortStadium)
+    ComfortStadium: ComfortStadium[];
 }

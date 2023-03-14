@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { UserCard } from "../../user_cards/entities/user_card.entity";
+import { Comment } from "../../comments/entities/comment.entity";
+import { Stadium } from "../../stadiums/entities/stadium.entity";
+import { UserWallet } from "../../user_wallet/entities/user_wallet.entity";
 
 interface UserAttrs {
     first_name: string;
@@ -60,4 +64,16 @@ export class User extends Model<User, UserAttrs> {
 
     // @BelongsToMany(() => Role, () => UserRole)
     // role: Role[];
+
+    @HasMany(() => UserCard)
+    UserCard: UserCard[];
+
+    @HasMany(() => Comment)
+    Comment: Comment[];
+
+    @HasMany(() => Stadium)
+    Stadium: Stadium[];
+
+    @HasMany(() => UserWallet)
+    UserWallet: UserWallet[];
 }

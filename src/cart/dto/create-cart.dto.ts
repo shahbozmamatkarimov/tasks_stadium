@@ -14,7 +14,7 @@ export class CreateCartDto {
     // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
     @IsNotEmpty()
     @IsNumber()
-    readonly user_times_id: number;
+    readonly st_times_id: number;
 
     // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
     @IsNotEmpty()

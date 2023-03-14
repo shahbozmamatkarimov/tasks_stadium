@@ -1,9 +1,12 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { User } from "../../users/entities/user.entity";
+import { UserCard } from "../../user_cards/entities/user_card.entity";
+import { StadiumTime } from "../../stadium_times/entities/stadium_time.entity";
 
 interface CartAttrs {
     user_id: number;
     user_wallet_id: number;
-    user_times_id: number;
+    st_times_id: number;
     date: Date;
  
 }
@@ -13,18 +16,30 @@ export class Cart extends Model<Cart, CartAttrs> {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     id: number;
 
+    @ForeignKey(() => User)
     @Column({ type: DataType.INTEGER })
     user_id: number;
 
+    @ForeignKey(() => UserCard)
     @Column({ type: DataType.INTEGER })
     user_wallet_id: number;
 
+    @ForeignKey(() => StadiumTime)
     @Column({ type: DataType.INTEGER })
-    user_times_id: number;
+    st_times_id: number;
 
     @Column({ type: DataType.DATE, defaultValue: Date.now() })
     date: Date;
 
-    // @BelongsToMany(() => Role, () => UserRole)
-    // role: Role[];
+    @BelongsTo(() => User)
+    user: User[];
+
+    @BelongsTo(() => UserCard)
+    usercard: UserCard[];
+
+    @BelongsTo(() => StadiumTime)
+    stadiumtime: StadiumTime[];
+
+    // HasMany(() => District)
+    // district: District[];
 }

@@ -16,9 +16,10 @@ import { CartModule } from './cart/cart.module';
 import { UserCardsModule } from './user_cards/user_cards.module';
 import { OrdersModule } from './orders/orders.module';
 import { UserWalletModule } from './user_wallet/user_wallet.module';
+import { StatusModule } from './status/status.module';
 
 @Module({
-  imports: [AdminModule, UsersModule, RegionModule, ComfortModule, DistrictModule, MediaModule, ComfortStadiumModule, CategoriesModule, StadiumsModule, CommentsModule, StadiumTimesModule, CartModule, UserCardsModule, OrdersModule, UserWalletModule],
+  imports: [AdminModule, UsersModule, RegionModule, ComfortModule, DistrictModule, MediaModule, ComfortStadiumModule, CategoriesModule, StadiumsModule, CommentsModule, StadiumTimesModule, CartModule, UserCardsModule, OrdersModule, UserWalletModule, StatusModule],
   controllers: [AppController],
   providers: [AppService],
 })

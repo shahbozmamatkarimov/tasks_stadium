@@ -1,5 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { District } from "../../district/entities/district.entity";
+import { Region } from "../../region/entities/region.entity";
+import { User } from "../../users/entities/user.entity";
+import { Category } from "../../categories/entities/category.entity";
+import { Media } from "../../media/entities/media.entity";
+import { ComfortStadium } from "../../comfort-stadium/entities/comfort-stadium.entity";
+import { StadiumTime } from "../../stadium_times/entities/stadium_time.entity";
+import { Comment } from "../../comments/entities/comment.entity";
 
 interface StadiumAttrs {
     category_id: number;
@@ -21,9 +29,11 @@ export class Stadium extends Model<Stadium, StadiumAttrs> {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     id: number;
 
+    @ForeignKey(() => Category)
     @Column({ type: DataType.NUMBER })
     category_id: number;
 
+    @ForeignKey(() => User)
     @Column({ type: DataType.STRING })
     owner_id: number;
 
@@ -39,9 +49,11 @@ export class Stadium extends Model<Stadium, StadiumAttrs> {
     @Column({ type: DataType.STRING })
     address: string;
 
+    @ForeignKey(() => Region)
     @Column({ type: DataType.INTEGER })
     region_id: number;
 
+    @ForeignKey(() => District)
     @Column({ type: DataType.INTEGER })
     district_id: number;
 
@@ -57,6 +69,24 @@ export class Stadium extends Model<Stadium, StadiumAttrs> {
     @Column({ type: DataType.DATE })
     end_time: Date;
 
-    // @BelongsToMany(() => Role, () => StadiumRole)
-    // role: Role[];
+    @HasMany(() => Media)
+    media: Media[];
+
+    @HasMany(()=> ComfortStadium)
+    comfortStadium: ComfortStadium[];
+
+    @HasMany(()=> StadiumTime)
+    stadiumTime: StadiumTime[];
+
+    @HasMany(()=> Comment)
+    comment: Comment[];
+    
+    @BelongsTo(() => Category)
+    role: Category[];
+
+    @BelongsTo(() => Region)
+    Region: Region[];
+    
+    @BelongsTo(() => District)
+    District: District[];
 }

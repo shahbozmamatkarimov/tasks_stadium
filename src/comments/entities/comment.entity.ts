@@ -13,9 +13,11 @@ export class Comment extends Model<Comment, CommentAttrs> {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     id: number;
 
+    // @ForeignKey(() => Region)
     @Column({ type: DataType.INTEGER })
     user_id: number;
 
+    // @ForeignKey(() => Region)
     @Column({ type: DataType.INTEGER })
     stadium_id: number;
 
@@ -24,4 +26,7 @@ export class Comment extends Model<Comment, CommentAttrs> {
 
     // @BelongsToMany(() => Role, () => UserRole)
     // role: Role[];
+
+    // HasMany(() => District)
+    // district: District[];
 }

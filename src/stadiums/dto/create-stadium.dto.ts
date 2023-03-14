@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsDate, IsNotEmpty, IsNumber, IsString, IsTimeZone } from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber, IsString } from "class-validator";
 import { DataType } from "sequelize";
 
 export class CreateStadiumDto {
@@ -55,11 +55,11 @@ export class CreateStadiumDto {
 
     // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
     @IsNotEmpty()
-    @IsTimeZone()
+    @IsDate()
     readonly start_time: DataType;
 
     // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
     @IsNotEmpty()
-    @IsTimeZone()
+    @IsDate()
     readonly end_time: DataType;
 }

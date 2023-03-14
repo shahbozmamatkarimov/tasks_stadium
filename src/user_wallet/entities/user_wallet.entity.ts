@@ -1,4 +1,6 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
+import { User } from "../../users/entities/user.entity";
+import { Cart } from "../../cart/entities/cart.entity";
 
 interface UserWalletAttr {
     user_id: number;
@@ -10,12 +12,16 @@ export class UserWallet extends Model<UserWallet, UserWalletAttr> {
     @Column({ type: DataType.INTEGER, autoIncrement: true, primaryKey: true })
     id: number;
 
+    @ForeignKey(() => User)
     @Column({ type: DataType.INTEGER })
     user_id: number;
 
     @Column({ type: DataType.INTEGER })
     wallet: number;
 
-    // @BelongsToMany(() => Role, () => UserRole)
-    // role: Role[];
+    @BelongsTo(() => User)
+    user: User[];
+    
+    @HasMany(() => Cart)
+    cart: Cart[];
 }
