@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateStadiumDto } from './dto/create-stadium.dto';
-import { UpdateStadiumDto } from './dto/update-stadium.dto';
+// import { UpdateStadiumDto } from './dto/update-stadium.dto';
 import { Stadium } from './entities/stadium.entity';
 import { InjectModel } from '@nestjs/sequelize';
 
@@ -23,10 +23,10 @@ export class StadiumsService {
     return stadium;
   }
 
-  async update(id: number, updateStadiumDto: UpdateStadiumDto) {
-    const stadium = await this.stadiumRepo.update({ ...updateStadiumDto }, { where: { id }, returning: true });
-    return stadium[1][0];
-  }
+  // async update(id: number, updateStadiumDto: UpdateStadiumDto) {
+  //   const stadium = await this.stadiumRepo.update({ ...updateStadiumDto }, { where: { id }, returning: true });
+  //   return stadium[1][0];
+  // }
 
   async remove(id: number) {
     const stadium = await this.stadiumRepo.destroy({ where: { id } });
