@@ -1,6 +1,6 @@
 import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
-import { User } from "../../users/entities/user.entity";
 import { Cart } from "../../cart/entities/cart.entity";
+import { User } from "../../users/models/user.model";
 
 interface UserWalletAttr {
     user_id: number;

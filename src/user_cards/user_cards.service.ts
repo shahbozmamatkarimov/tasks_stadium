@@ -3,6 +3,7 @@ import { CreateUserCardDto } from './dto/create-user_card.dto';
 import { UpdateUserCardDto } from './dto/update-user_card.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { UserCard } from './entities/user_card.entity';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class UserCardsService {

@@ -10,11 +10,11 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class StadiumsController {
   constructor(private readonly stadiumsService: StadiumsService) { }
 
-  @ApiOperation({ summary: 'POST', description: 'Create Admin' })
-  @Post()
-  create(@Body() createStadiumDto: CreateStadiumDto) {
-    return this.stadiumsService.create(createStadiumDto);
-  }
+  // @ApiOperation({ summary: 'POST', description: 'Create Admin' })
+  // @Post()
+  // create(@Body() createStadiumDto: CreateStadiumDto) {
+  //   return this.stadiumsService.create(createStadiumDto);
+  // }
 
   @ApiOperation({ summary: 'GET', description: 'Get All Admin' })
   @Get()

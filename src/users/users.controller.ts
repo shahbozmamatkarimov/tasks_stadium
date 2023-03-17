@@ -1,40 +1,71 @@
-/* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Put, UseGuards, Res, HttpCode, HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import {ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagger'
+import { JwtGuard } from '../guards/jwt-auth.guard';
+import { UserSelfGuard } from '../guards/user-self.guard';
+import { Response } from 'express';
+import { LoginUserDto } from './dto/login-user.dto';
+import { User } from './models/user.model';
+import { CookieGetter } from '../decorators/cookieGetter.decorator';
 
-@ApiTags('Admin')
+
+@ApiTags('Users lar bo`limi')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
-  @ApiOperation({ summary: 'POST', description: 'Create Admin' })
-  @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  @Post('signup')
+  registration(@Body() createUserDto: CreateUserDto, @Res({ passthrough: true}) res: Response) {
+    return this.usersService.registration(createUserDto, res);
   }
 
-  @ApiOperation({ summary: 'GET', description: 'Get All Admin' })
-  @Get()
+  @HttpCode(HttpStatus.OK)
+  @Post('login')
+  login(@Body() loginUserDto: LoginUserDto, @Res({ passthrough: true}) res: Response) {
+    return this.usersService.login(loginUserDto, res);
+  }
+
+
+  @HttpCode(HttpStatus.OK)
+  @Post('logout')
+  logout(@CookieGetter('refresh_token') refreshToken: string, @Res({ passthrough: true}) res: Response) {
+    return this.usersService.logout(refreshToken, res);
+  }
+
+  @HttpCode(HttpStatus.OK)
+  @Post(':id/refresh')
+  refreshToken(@Param('id') id: number, @CookieGetter('refresh_token') refreshToken: string, @Res({ passthrough: true}) res: Response) {
+    return this.usersService.refreshToken(id, refreshToken, res);
+  }
+
+  @Get('activate/:link')
+  activate(@Param('link') link: string){
+    return this.usersService.activate(link)
+  }
+
+  @ApiOperation({summary: 'Hamma userlarni olish'})
+  @UseGuards(JwtGuard)
+  @Get('all')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @ApiOperation({ summary: 'POST', description: 'Create role' })
+  @ApiOperation({summary: 'Bitta userni olish'})
+  @UseGuards(UserSelfGuard)
+  @UseGuards(JwtGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }
 
-  @ApiOperation({ summary: 'PUT', description: 'Update Admin' })
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
-  }
 
-  @ApiOperation({ summary: 'Delete', description: 'Delete Admin' })
+  @ApiOperation({summary: 'userni o`chirish'})
+  @ApiResponse({status: 203, description: "1"})
+  @UseGuards(UserSelfGuard)
+  @UseGuards(JwtGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);

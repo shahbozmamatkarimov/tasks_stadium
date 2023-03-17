@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateStadiumDto } from './dto/create-stadium.dto';
-// import { UpdateStadiumDto } from './dto/update-stadium.dto';
 import { Stadium } from './entities/stadium.entity';
 import { InjectModel } from '@nestjs/sequelize';
 
@@ -10,9 +9,9 @@ export class StadiumsService {
   constructor(@InjectModel(Stadium) private stadiumRepo: typeof Stadium,
     private readonly stadiumService: StadiumsService) { };
 
-  async create(createStadiumDto: CreateStadiumDto) {
-    return await this.stadiumRepo.create(createStadiumDto);
-  }
+  // async create(createStadiumDto: CreateStadiumDto) {
+  //   return await this.stadiumRepo.create(createStadiumDto);
+  // }
 
   async findAll() {
     return await this.stadiumRepo.findAll({ include: { all: true } });

@@ -1,7 +1,7 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { User } from "../../users/entities/user.entity";
 import { UserCard } from "../../user_cards/entities/user_card.entity";
 import { StadiumTime } from "../../stadium_times/entities/stadium_time.entity";
+import { User } from "../../users/models/user.model";
 
 interface CartAttrs {
     user_id: number;

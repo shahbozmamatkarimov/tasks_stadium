@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { LoginDto } from './dto/login-auth.dto';
+import { link } from 'fs';
 
 @Controller('auth')
 export class AuthController {
@@ -14,6 +15,11 @@ export class AuthController {
     return this.authService.registration(createUserDto)
   }
 
+  @Get('activate/:link')
+    activate(@Param('link') link: string){
+      return this.authService.activate(link);
+    }
+  }
 
   @HttpCode(200)
   @Post('/login')

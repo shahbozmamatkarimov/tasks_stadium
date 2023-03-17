@@ -2,12 +2,12 @@
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 import { District } from "../../district/entities/district.entity";
 import { Region } from "../../region/entities/region.entity";
-import { User } from "../../users/entities/user.entity";
 import { Category } from "../../categories/entities/category.entity";
 import { Media } from "../../media/entities/media.entity";
 import { ComfortStadium } from "../../comfort-stadium/entities/comfort-stadium.entity";
 import { StadiumTime } from "../../stadium_times/entities/stadium_time.entity";
 import { Comment } from "../../comments/entities/comment.entity";
+import { User } from "../../users/models/user.model";
 
 interface StadiumAttrs {
     category_id: number;

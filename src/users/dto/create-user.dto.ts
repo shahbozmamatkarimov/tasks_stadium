@@ -1,64 +1,43 @@
-/* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsString, IsEmail, IsBoolean, IsDate } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString, IsDate, IsEmail, IsStrongPassword , isPhoneNumber, IsDateString, IsPhoneNumber} from "class-validator";
+
 
 export class CreateUserDto {
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+
+    @ApiProperty({example: 'Fakhriddin', description: "foydalanuvchi Ismi"})
     @IsNotEmpty()
     @IsString()
-    readonly first_name: string;
+    first_name: string;
 
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+    @ApiProperty({example: 'Abduraimov', description: "foydalanuvchi familiyasi"})
+    @IsString()
+    last_name: string;
+
+    @ApiProperty({example: 'Fakhriddin01', description: "foydalanuvchi login ismi"})
     @IsNotEmpty()
     @IsString()
-    readonly last_name: string;
+    username: string;
 
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+    @ApiProperty({example: 'pa$$worD1234', description: "foydalanuvchi paaroli"})
+    @IsNotEmpty()
+    @IsStrongPassword()
+    password: string;
+
+    @ApiProperty({example: 'pa$$worD1234', description: "foydalanuvchi paroli tasdiqlashi"})
     @IsNotEmpty()
     @IsString()
-    readonly username: string;
+    confirm_password: string;
 
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsNotEmpty()
-    @IsString()
-    readonly hashed_password: string;
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsNotEmpty()
-    @IsString()
-    readonly telegram_link: string;
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+    @ApiProperty({example: 'example@mail.uz', description: "foydalanuvchi emaili"})
     @IsEmail()
-    readonly email: string;
+    email: string;
 
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+    @ApiProperty({example: '+998991112233', description: "foydalanuvchi telefon raqami"})
     @IsNotEmpty()
-    @IsString()
-    readonly phone: string;
+    @IsPhoneNumber()
+    phone: string;
 
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
+    @ApiProperty({example: '1989-06-02', description: "foydalanuvchi tug'ilgan kuni"})
     @IsNotEmpty()
-    @IsString()
-    readonly user_photo: string;
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsDate()
-    @IsNotEmpty()
-    readonly birthday: Date;
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsBoolean()
-    readonly is_active: boolean;
-
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsBoolean()
-    readonly is_owner: boolean;
-
-    // @ApiProperty({ example: 'User1', description: 'Foydalanuvchi ismi' })
-    @IsNotEmpty()
-    @IsString()
-    readonly hashed_refresh_token: string;
+    birthday: Date;
 }
-
